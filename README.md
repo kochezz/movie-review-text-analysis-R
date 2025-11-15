@@ -38,7 +38,8 @@ This project applies **Text Mining and Sentiment Analysis in R** to explore movi
 
 ## ☁️ Word Cloud
 
-*(Place your generated word cloud image here, e.g., `/outputs/wordcloud.png`)*
+<img width="558" height="753" alt="image" src="https://github.com/user-attachments/assets/2686975d-83e6-401c-b274-e59fd2d4f3a3" />
+
 
 ```r
 wordcloud(words = names(freq_terms),

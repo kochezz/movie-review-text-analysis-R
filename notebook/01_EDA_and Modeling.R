@@ -29,6 +29,8 @@ library(tidyr)
 # ==============================================================================
 # QUESTION 1: IMPORT AND CLEAN THE DATA
 # ==============================================================================
+
+invisible({
 cat("\n=== QUESTION 1: Importing and Cleaning Data ===\n")
 
 
@@ -72,8 +74,9 @@ cat("✓ Removed extra whitespace\n")
 
 # View a sample of cleaned text
 cat("\nSample of cleaned text:\n")
-print(as.character(corpus[[1]])[1:200])  # First 200 characters of first document
+print(as.character(corpus[[1]])[1:10])  # First 10 characters of first document
 
+})
 # ==============================================================================
 # CREATE DOCUMENT-TERM MATRIX (DTM)
 # ==============================================================================
@@ -91,6 +94,8 @@ cat("  Sparsity:", round(100 * (1 - length(dtm$v)/(nrow(dtm)*ncol(dtm))), 2), "%
 # ==============================================================================
 # QUESTION 2: FIND WORDS WITH MINIMUM FREQUENCY 6
 # ==============================================================================
+
+invisible({
 cat("\n\n=== QUESTION 2: Words with Minimum Frequency 6 ===\n")
 
 # Calculate the frequency of each term across all documents
@@ -113,11 +118,13 @@ barplot(freq_6,
         col = "steelblue",
         main = "Words with Frequency >= 6",
         xlab = "Frequency",
-        cex.names = 0.7)
-
+        cex.names = 1)
+})
 # ==============================================================================
 # QUESTION 3: WORDS WITH AT LEAST 0.35 CORRELATION WITH 'FILM'
 # ==============================================================================
+
+invisible({
 cat("\n\n=== QUESTION 3: Words Correlated with 'film' (>= 0.35) ===\n")
 
 # Find associations (correlations) with the word "film"
@@ -146,7 +153,7 @@ if ("film" %in% colnames(dtm)) {
             main = "Words Correlated with 'film' (>= 0.35)",
             ylab = "Correlation",
             ylim = c(0, 1),
-            cex.names = 0.8)
+            cex.names = 1)
   } else {
     cat("No words found with correlation >= 0.35 with 'film'\n")
     cat("Try a lower threshold, e.g., 0.25\n")
@@ -155,9 +162,12 @@ if ("film" %in% colnames(dtm)) {
   cat("The word 'film' does not appear in the corpus after cleaning.\n")
 }
 
+})
 # ==============================================================================
 # QUESTION 4: CREATE WORDCLOUD (Minimum Frequency 4)
 # ==============================================================================
+
+invisible({
 cat("\n\n=== QUESTION 4: Creating Word Cloud ===\n")
 
 # Calculate term frequencies
@@ -189,10 +199,13 @@ title(main = "Word Cloud (Min Frequency = 4)",
       cex.main = 1.5)
 
 cat("✓ Word cloud created successfully!\n")
+})
 
 # ==============================================================================
 # QUESTION 5: SENTIMENT ANALYSIS
 # ==============================================================================
+
+invisible({
 cat("\n\n=== QUESTION 5: Sentiment Analysis ===\n")
 
 # For sentiment analysis, we'll use the NRC emotion lexicon
@@ -287,10 +300,13 @@ ggplot(sentiment_counts, aes(x = reorder(sentiment, n), y = n, fill = sentiment)
        y = "Count") +
   theme_minimal() +
   theme(legend.position = "none")
+})
 
 # ==============================================================================
 # QUESTION 6: PLOT WORDS OCCURRING MORE THAN 3 TIMES (using tidytext)
 # ==============================================================================
+
+invisible({
 cat("\n\n=== QUESTION 6: Words Occurring More Than 3 Times ===\n")
 
 # Count word frequencies using tidy approach
@@ -332,4 +348,4 @@ ggplot(frequent_words %>% top_n(20, n),
        y = "Frequency") +
   theme_minimal() +
   theme(axis.text.y = element_text(size = 10))
-
+})
